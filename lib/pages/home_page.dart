@@ -3,7 +3,7 @@ import 'package:app_six_chat_firebase/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   // chat and auth services
   final ChatService _chatService = ChatService();
@@ -11,6 +11,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+    );
   }
 }
