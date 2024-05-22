@@ -19,6 +19,8 @@ class HomePage extends StatelessWidget {
         foregroundColor: Colors.grey,
         elevation: 0,
       ),
+      drawer: MyDrawer(),
+      body: _buildUserList(),
     );
   }
 }
