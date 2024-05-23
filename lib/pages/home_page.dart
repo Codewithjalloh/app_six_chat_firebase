@@ -1,8 +1,10 @@
+import 'package:app_six_chat_firebase/pages/chat_page.dart';
 import 'package:app_six_chat_firebase/services/auth/auth_service.dart';
 import 'package:app_six_chat_firebase/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 
 import '../components/my_drawer.dart';
+import '../components/user_tile.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -50,9 +52,27 @@ class HomePage extends StatelessWidget {
           );
         });
   }
-  Widget _buildUserListItem(Map<String, dynamic> userData, BuildContext context) {
+
+  Widget _buildUserListItem(
+      Map<String, dynamic> userData, BuildContext context) {
     if (userData["email"] != _authService.getCurrentUser()!.email) {
-      return UserTile()
+      return UserTile(
+        text: userData["email"],
+        onTap: () {
+          // tapped on a user => go to chat page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatPage(
+                receivingEmail: userData["email"],
+                receiverID: userData["uid"],
+              ),
+            ),
+          );
+        },
+      );
+    } else {
+      return Container();
     }
   }
 }
