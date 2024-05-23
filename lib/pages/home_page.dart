@@ -50,4 +50,9 @@ class HomePage extends StatelessWidget {
           );
         });
   }
+  Widget _buildUserListItem(Map<String, dynamic> userData, BuildContext context) {
+    if (userData["email"] != _authService.getCurrentUser()!.email) {
+      return UserTile()
+    }
+  }
 }
