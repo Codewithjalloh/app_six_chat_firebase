@@ -23,4 +23,7 @@ class HomePage extends StatelessWidget {
       body: _buildUserList(),
     );
   }
+
+  // build a list of users except for the current logged in user
+  Widget _buildUserList() {}
 }
