@@ -2,6 +2,8 @@ import 'package:app_six_chat_firebase/services/auth/auth_service.dart';
 import 'package:app_six_chat_firebase/services/chat/chat_service.dart';
 import 'package:flutter/material.dart';
 
+import '../components/my_drawer.dart';
+
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
@@ -25,5 +27,11 @@ class HomePage extends StatelessWidget {
   }
 
   // build a list of users except for the current logged in user
-  Widget _buildUserList() {}
+  Widget _buildUserList() {
+    return StreamBuilder(
+        stream: _chatService.getUsersStream(),
+        builder: (context, snapshot) {
+          // error
+        });
+  }
 }
