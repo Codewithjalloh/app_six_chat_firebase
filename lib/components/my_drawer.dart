@@ -25,7 +25,8 @@ class MyDrawer extends StatelessWidget {
               // logo
               Theme(
                 data: Theme.of(context).copyWith(
-                    dividerTheme: DividerThemeData(color: Colors.transparent)),
+                    dividerTheme:
+                        const DividerThemeData(color: Colors.transparent)),
                 child: DrawerHeader(
                   child: Center(
                     child: Icon(
@@ -39,10 +40,10 @@ class MyDrawer extends StatelessWidget {
 
               // home list tile
               Padding(
-                padding: EdgeInsets.only(left: 25.0),
+                padding: const EdgeInsets.only(left: 25.0),
                 child: ListTile(
-                  title: Text("H 0 M E"),
-                  leading: Icon(Icons.home),
+                  title: const Text("H 0 M E"),
+                  leading: const Icon(Icons.home),
                   onTap: () {
                     // pop the nav
                     Navigator.pop(context);
@@ -51,10 +52,10 @@ class MyDrawer extends StatelessWidget {
               ),
               // setting list tile
               Padding(
-                padding: EdgeInsets.only(left: 25.0),
+                padding: const EdgeInsets.only(left: 25.0),
                 child: ListTile(
-                  title: Text("S E T T I N G S"),
-                  leading: Icon(Icons.settings),
+                  title: const Text("S E T T I N G S"),
+                  leading: const Icon(Icons.settings),
                   onTap: () {
                     // pop the drawer
                     Navigator.pop(context);
@@ -77,7 +78,7 @@ class MyDrawer extends StatelessWidget {
             padding: const EdgeInsets.only(left: 25.0, bottom: 25.0),
             child: ListTile(
               title: const Text("L O G O U T"),
-              leading: Icon(Icons.logout),
+              leading: const Icon(Icons.logout),
               onTap: logout,
             ),
           )
