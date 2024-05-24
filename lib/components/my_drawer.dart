@@ -12,6 +12,18 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Drawer(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // logo
+          Theme(
+              data: Theme.of(context).copyWith(
+                  dividerTheme: DividerThemeData(color: Colors.transparent)),
+              child: DrawerHeader())
+        ],
+      ),
+    );
   }
 }
