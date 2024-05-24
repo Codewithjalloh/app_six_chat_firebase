@@ -21,7 +21,15 @@ class MyDrawer extends StatelessWidget {
           Theme(
               data: Theme.of(context).copyWith(
                   dividerTheme: DividerThemeData(color: Colors.transparent)),
-              child: DrawerHeader())
+              child: DrawerHeader(
+                child: Center(
+                  child: Icon(
+                    Icons.message,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 48,
+                  ),
+                ),
+              ))
         ],
       ),
     );
