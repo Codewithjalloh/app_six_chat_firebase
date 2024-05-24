@@ -20,53 +20,67 @@ class MyDrawer extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // logo
-          Theme(
-            data: Theme.of(context).copyWith(
-                dividerTheme: DividerThemeData(color: Colors.transparent)),
-            child: DrawerHeader(
-              child: Center(
-                child: Icon(
-                  Icons.message,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 48,
+          Column(
+            children: [
+              // logo
+              Theme(
+                data: Theme.of(context).copyWith(
+                    dividerTheme: DividerThemeData(color: Colors.transparent)),
+                child: DrawerHeader(
+                  child: Center(
+                    child: Icon(
+                      Icons.message,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 48,
+                    ),
+                  ),
                 ),
               ),
-            ),
+
+              // home list tile
+              Padding(
+                padding: EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  title: Text("H 0 M E"),
+                  leading: Icon(Icons.home),
+                  onTap: () {
+                    // pop the nav
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+              // setting list tile
+              Padding(
+                padding: EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  title: Text("S E T T I N G S"),
+                  leading: Icon(Icons.settings),
+                  onTap: () {
+                    // pop the drawer
+                    Navigator.pop(context);
+
+                    // go to the setting page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SettingPage(),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
 
-          // home list tile
+          // logout tile
           Padding(
-            padding: EdgeInsets.only(left: 25.0),
+            padding: const EdgeInsets.only(left: 25.0, bottom: 25.0),
             child: ListTile(
-              title: Text("H 0 M E"),
-              leading: Icon(Icons.home),
-              onTap: () {
-                // pop the nav
-                Navigator.pop(context);
-              },
+              title: const Text("L O G O U T"),
+              leading: Icon(Icons.logout),
+              onTap: logout,
             ),
-          ),
-          // setting list tile
-          Padding(
-            padding: EdgeInsets.only(left: 25.0),
-            child: ListTile(
-              title: Text("S E T T I N G S"),
-              leading: Icon(Icons.settings),
-              onTap: () {
-                // pop the drawer
-                Navigator.pop(context);
-
-                // go to the setting page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SettingPage(),
-                  ),
-                );
-              },
-            ),
-          ),
+          )
         ],
       ),
     );
