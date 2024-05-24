@@ -1,5 +1,8 @@
 import 'package:app_six_chat_firebase/services/auth/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import '../pages/setting_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -43,7 +46,27 @@ class MyDrawer extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-          )
+          ),
+          // setting list tile
+          Padding(
+            padding: EdgeInsets.only(left: 25.0),
+            child: ListTile(
+              title: Text("S E T T I N G S"),
+              leading: Icon(Icons.settings),
+              onTap: () {
+                // pop the drawer
+                Navigator.pop(context);
+
+                // go to the setting page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SettingPage(),
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
