@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+<<<<<<< HEAD
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 
+=======
+>>>>>>> origin/main
 class RegisterPage extends StatelessWidget {
   final void Function()? onTap;
 
@@ -15,6 +18,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
@@ -96,5 +100,8 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
+=======
+    return Scaffold();
+>>>>>>> origin/main
   }
 }
