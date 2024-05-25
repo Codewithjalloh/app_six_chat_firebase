@@ -1,11 +1,9 @@
+import 'package:app_six_chat_firebase/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
-<<<<<<< HEAD
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 
-=======
->>>>>>> origin/main
 class RegisterPage extends StatelessWidget {
   final void Function()? onTap;
 
@@ -16,9 +14,35 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
+  void register(BuildContext context) {
+    // get auth services
+    final _auth = AuthService();
+
+    // password match => create user
+    if (_passwordController.text == _confirmPasswordController.text) {
+      try {
+        _auth.signUpWithEmailPassword(
+            _emailController.text, _passwordController.text);
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(e.toString()),
+          ),
+        );
+      }
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Password don't match"),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
@@ -100,8 +124,5 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
-=======
-    return Scaffold();
->>>>>>> origin/main
   }
 }
