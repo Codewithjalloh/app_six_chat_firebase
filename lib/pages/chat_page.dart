@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../components/chat_bubble.dart';
+
 class ChatPage extends StatefulWidget {
   final String receivingEmail;
   final String receiverID;
@@ -132,7 +134,8 @@ class _ChatPageState extends State<ChatPage> {
     return Container(
       alignment: alignment,
       child: Column(
-        crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment:
+            isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           ChatBubble(
             message: data["message"],
@@ -140,7 +143,7 @@ class _ChatPageState extends State<ChatPage> {
           ),
         ],
       ),
-    )
+    );
   }
 
   // build message input
