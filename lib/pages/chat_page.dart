@@ -1,3 +1,4 @@
+import 'package:app_six_chat_firebase/components/my_textfield.dart';
 import 'package:app_six_chat_firebase/services/auth/auth_service.dart';
 import 'package:app_six_chat_firebase/services/chat/chat_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,7 +19,6 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   // text controller
-
   final TextEditingController _messageController = TextEditingController();
 
   // chat & auth services
@@ -34,16 +34,23 @@ class _ChatPageState extends State<ChatPage> {
 
     // add listerner to focus node
     myFocusNode.addListener(() {
-      // create a delay so that the keyboard has time to show up
-      // then the amount of remaining space will be calculated
-      // then scroll down
       if (myFocusNode.hasFocus) {
+        // create a delay so that the keyboard has time to show up
+        // then the amount of remaining space will be calculated
+        // then scroll down
         Future.delayed(
           const Duration(milliseconds: 500),
           () => scrollDown(),
         );
+        // then the amount
       }
     });
+
+    // wait a bit for listView to the build, then scroll to button
+    Future.delayed(
+      Duration(milliseconds: 500),
+      () => scrollDown(),
+    );
   }
 
   @override
@@ -55,9 +62,13 @@ class _ChatPageState extends State<ChatPage> {
 
   // scroll constroller
   final ScrollController _scrollController = ScrollController();
+
   void scrollDown() {
-    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-        duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   // send messages
@@ -90,6 +101,7 @@ class _ChatPageState extends State<ChatPage> {
           Expanded(
             child: _buildMessageList(),
           ),
+
           // user input
           _buildUserInput(),
         ],
@@ -103,14 +115,15 @@ class _ChatPageState extends State<ChatPage> {
     return StreamBuilder(
         stream: _chatService.getMessages(widget.receiverID, senderID),
         builder: (context, snapshot) {
-          // errors
+          // erros
           if (snapshot.hasError) {
             return const Text("Error");
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("Loading...");
+            return const Text("Loading..");
           }
+
           // return list view
           return ListView(
             controller: _scrollController,
@@ -125,7 +138,7 @@ class _ChatPageState extends State<ChatPage> {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     // is current user
-    bool isCurrentUser = data["senderID"] == _authService.getCurrentUser()!.uid;
+    bool isCurrentUser = data['senderID'] == _authService.getCurrentUser()!.uid;
 
     // alight messafe to the right send is current otherwise left
     var alignment =
@@ -146,10 +159,36 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  // build message input
+// build message input
   Widget _buildUserInput() {
     return Padding(
-      padding: EdgeInsets.only(bottom: 50.0),
+      padding: const EdgeInsets.only(bottom: 50.0),
+      child: Row(
+        children: [
+          // textfield should take up
+          Expanded(
+            child: MyTextfield(
+              controller: _messageController,
+              hintText: "Type a message",
+              obscureText: false,
+              focusNode: myFocusNode,
+            ),
+          ),
+
+          // send button
+          Container(
+              decoration:
+                  BoxDecoration(color: Colors.green, shape: BoxShape.circle),
+              margin: EdgeInsets.only(right: 25),
+              child: IconButton(
+                onPressed: sendMessage,
+                icon: Icon(
+                  Icons.arrow_upward,
+                  color: Colors.white,
+                ),
+              )),
+        ],
+      ),
     );
   }
 }
