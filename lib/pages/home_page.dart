@@ -13,15 +13,22 @@ class HomePage extends StatelessWidget {
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
 
+  // get current user
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: Text(
+          "Home Page",
+        ),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey,
         elevation: 0,
+        // actions: [
+        //   IconButton(onPressed: logout, icon: Icon(Icons.logout),)
+        // ],
       ),
       drawer: MyDrawer(),
       body: _buildUserList(),
@@ -31,31 +38,31 @@ class HomePage extends StatelessWidget {
   // build a list of users except for the current logged in user
   Widget _buildUserList() {
     return StreamBuilder(
-        stream: _chatService.getUsersStream(),
-        builder: (context, snapshot) {
-          // error
-          if (snapshot.hasError) {
-            return const Text("Error");
-          }
+      stream: _chatService.getUsersStream(),
+      builder: (context, snapshot) {
+        // error
+        if (snapshot.hasError) {
+          return const Text("Error");
+        }
 
-          // loading
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("Loading");
-          }
+        // loading
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text("Loading");
+        }
 
-          // return list view
-          return ListView(
-            children: snapshot.data!
-                .map<Widget>(
-                    (userData) => _buildUserListItem(userData, context))
-                .toList(),
-          );
-        });
+        // return list view
+        return ListView(
+          children: snapshot.data!
+              .map<Widget>((userData) => _buildUserListItem(userData, context))
+              .toList(),
+        );
+      },
+    );
   }
 
   Widget _buildUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
-    if (userData["email"] != _authService.getCurrentUser()!.email) {
+    if (userData['email'] != _authService.getCurrentUser()!.email) {
       return UserTile(
         text: userData["email"],
         onTap: () {
@@ -65,7 +72,7 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => ChatPage(
                 receivingEmail: userData["email"],
-                receiverID: userData["uid"],
+                receiverID: userData['uid'],
               ),
             ),
           );
